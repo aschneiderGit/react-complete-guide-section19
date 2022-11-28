@@ -69,7 +69,12 @@ export const getCartData = (cartData) => {
 
 		try {
 			const cartData = await sendRequest();
-			dispatch(cartActions.replaceCart(cartData));
+			dispatch(
+				cartActions.replaceCart({
+					items: cartData.items || [],
+					totalQuantity: cartData.totalQuantity,
+				})
+			);
 			dispatch(
 				uiActions.showNotification({
 					status: 'success',
